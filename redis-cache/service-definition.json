@@ -1,0 +1,28 @@
+{
+  "serviceName": "redis-cache",
+  "taskDefinition": "redis-cache",
+  "cluster": "your-cluster-name",
+  "launchType": "FARGATE",
+  "desiredCount": 2,
+  "deploymentConfiguration": {
+    "maximumPercent": 200,
+    "minimumHealthyPercent": 100
+  },
+  "networkConfiguration": {
+    "awsvpcConfiguration": {
+      "subnets": [
+        "subnet-xxxxxxxx",
+        "subnet-yyyyyyyy"
+      ],
+      "securityGroups": [
+        "sg-xxxxxxxx"
+      ],
+      "assignPublicIp": "ENABLED"
+    }
+  },
+  "serviceRegistries": [
+    {
+      "registryArn": "arn:aws:servicediscovery:region:account-id:service/srv-xxxxx"
+    }
+  ]
+}
