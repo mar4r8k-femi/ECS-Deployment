@@ -1,0 +1,31 @@
+{
+  "serviceName": "nginx-app",
+  "taskDefinition": "nginx-app",
+  "cluster": "your-cluster-name",
+  "launchType": "FARGATE",
+  "desiredCount": 3,
+  "deploymentConfiguration": {
+    "maximumPercent": 200,
+    "minimumHealthyPercent": 100
+  },
+  "networkConfiguration": {
+    "awsvpcConfiguration": {
+      "subnets": [
+        "subnet-xxxxxxxx",
+        "subnet-yyyyyyyy"
+      ],
+      "securityGroups": [
+        "sg-xxxxxxxx"
+      ],
+      "assignPublicIp": "ENABLED"
+    }
+  },
+  "loadBalancers": [
+    {
+      "targetGroupArn": "arn:aws:elasticloadbalancing:region:account-id:targetgroup/nginx-tg/xxxxx",
+      "containerName": "nginx-app",
+      "containerPort": 80
+    }
+  ],
+  "healthCheckGracePeriodSeconds": 60
+}
