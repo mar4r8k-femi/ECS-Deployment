@@ -1,0 +1,31 @@
+{
+  "serviceName": "httpbin-test",
+  "taskDefinition": "httpbin-test",
+  "cluster": "your-cluster-name",
+  "launchType": "FARGATE",
+  "desiredCount": 2,
+  "deploymentConfiguration": {
+    "maximumPercent": 200,
+    "minimumHealthyPercent": 100
+  },
+  "networkConfiguration": {
+    "awsvpcConfiguration": {
+      "subnets": [
+        "subnet-xxxxxxxx",
+        "subnet-yyyyyyyy"
+      ],
+      "securityGroups": [
+        "sg-xxxxxxxx"
+      ],
+      "assignPublicIp": "ENABLED"
+    }
+  },
+  "loadBalancers": [
+    {
+      "targetGroupArn": "arn:aws:elasticloadbalancing:region:account-id:targetgroup/httpbin-tg/xxxxx",
+      "containerName": "httpbin-test",
+      "containerPort": 80
+    }
+  ],
+  "healthCheckGracePeriodSeconds": 60
+}
